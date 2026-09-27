@@ -269,7 +269,18 @@ def division_skill():
              "[4] DIVISION (/)", GREEN)
     a = get_number("  Dividend (first number) : ")
     b = get_number("  Divisor (second number) : ")
-    result = divide(a, b)
+
+    # dividing by zero would crash the program, so catch it here
+    try:
+        result = divide(a, b)
+    except ZeroDivisionError:
+        draw_box([f"{term(a)} / 0 = ???",
+                  "",
+                  "ZeroDivisionError: you cannot divide by zero.",
+                  "The bug survived this time. Use a divisor "
+                  "other than 0."],
+                 "ERROR: DIVISION BY ZERO", RED)
+        return
     if result_too_big(result):
         return
 
