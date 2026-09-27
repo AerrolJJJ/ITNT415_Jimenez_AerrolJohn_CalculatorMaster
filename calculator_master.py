@@ -173,6 +173,16 @@ def locked_skill(skill_name):
              "[LOCKED]", YELLOW)
 
 
+def result_too_big(result):
+    """Show an error and return True if the answer overflowed to infinity."""
+    if math.isfinite(result):
+        return False
+    draw_box(["The answer is too big for Python to store.",
+              "Try smaller numbers, hero."],
+             "OverflowError", RED)
+    return True
+
+
 # [addition_Jimenez] Addition
 def add(a, b):
     return a + b
@@ -239,6 +249,8 @@ def multiplication_skill():
     a = get_number("  First number : ")
     b = get_number("  Second number: ")
     result = multiply(a, b)
+    if result_too_big(result):
+        return
 
     equation = f"{term(a)} x {term(b)} = {format_number(result)}"
     draw_box([equation, "", f"Product: {format_number(result)}"],
