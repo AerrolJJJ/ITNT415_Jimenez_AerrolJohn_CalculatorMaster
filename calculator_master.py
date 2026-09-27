@@ -213,8 +213,16 @@ def subtraction_skill():
     b = get_number("  Second number: ")
     result = subtract(a, b)
 
+    # tell the user why the answer came out negative, zero or positive
+    if result < 0:
+        note = "The second number is bigger, so the answer is negative."
+    elif result == 0:
+        note = "Both numbers are equal, so the answer is zero."
+    else:
+        note = "The first number is bigger, so the answer is positive."
+
     equation = f"{term(a)} - {term(b)} = {format_number(result)}"
-    draw_box([equation, "", f"Difference: {format_number(result)}"],
+    draw_box([equation, "", f"Difference: {format_number(result)}", note],
              "SUBTRACTION RESULT", GREEN)
     add_to_log(f"Subtraction: {equation}")
     gain_xp()
