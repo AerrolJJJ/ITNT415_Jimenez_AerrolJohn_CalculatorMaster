@@ -201,6 +201,25 @@ def addition_skill():
     gain_xp()
 
 
+# [subtraction_Jimenez] Subtraction
+def subtract(a, b):
+    return a - b
+
+
+def subtraction_skill():
+    draw_box(["Subtract the second number from the first."],
+             "[2] SUBTRACTION (-)", GREEN)
+    a = get_number("  First number : ")
+    b = get_number("  Second number: ")
+    result = subtract(a, b)
+
+    equation = f"{term(a)} - {term(b)} = {format_number(result)}"
+    draw_box([equation, "", f"Difference: {format_number(result)}"],
+             "SUBTRACTION RESULT", GREEN)
+    add_to_log(f"Subtraction: {equation}")
+    gain_xp()
+
+
 # ==============================================================
 #   SCREENS
 # ==============================================================
@@ -275,7 +294,7 @@ def main():
         if choice == "1":
             addition_skill()
         elif choice == "2":
-            locked_skill("Subtraction")
+            subtraction_skill()
         elif choice == "3":
             locked_skill("Multiplication")
         elif choice == "4":
