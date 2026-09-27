@@ -134,6 +134,21 @@ def get_number(prompt):
         return number
 
 
+def get_int(prompt, low, high):
+    """Keep asking until the user types a whole number from low to high."""
+    while True:
+        raw = input(f"{YELLOW}{prompt}{RESET}").strip()
+        try:
+            number = int(raw)
+        except ValueError:
+            print(f"{RED}  SyntaxError: '{raw}' is not a whole number.{RESET}")
+            continue
+        if number < low or number > high:
+            print(f"{RED}  RangeError: pick a number from {low} to {high}.{RESET}")
+            continue
+        return number
+
+
 def get_hero_name():
     """Ask for a hero name that fits inside the status box."""
     while True:
@@ -164,12 +179,22 @@ def add(a, b):
 
 
 def addition_skill():
-    draw_box(["Add two numbers together."], "[1] ADDITION (+)", GREEN)
-    a = get_number("  First number : ")
-    b = get_number("  Second number: ")
-    result = add(a, b)
+    draw_box(["Add 2 to 10 numbers together."], "[1] ADDITION (+)", GREEN)
+    count = get_int("  How many numbers will you add? (2-10): ", 2, 10)
 
-    equation = f"{term(a)} + {term(b)} = {format_number(result)}"
+    values = []
+    for i in range(1, count + 1):
+        values.append(get_number(f"  Number #{i}: "))
+
+    # add them one by one using the add() function
+    result = 0.0
+    for value in values:
+        result = add(result, value)
+
+    parts = []
+    for value in values:
+        parts.append(term(value))
+    equation = " + ".join(parts) + " = " + format_number(result)
     draw_box([equation, "", f"Sum: {format_number(result)}"],
              "ADDITION RESULT", GREEN)
     add_to_log(f"Addition: {equation}")
