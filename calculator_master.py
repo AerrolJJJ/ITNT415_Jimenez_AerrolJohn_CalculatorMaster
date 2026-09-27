@@ -228,6 +228,25 @@ def subtraction_skill():
     gain_xp()
 
 
+# [multiplication_Jimenez] Multiplication
+def multiply(a, b):
+    return a * b
+
+
+def multiplication_skill():
+    draw_box(["Multiply two numbers together."],
+             "[3] MULTIPLICATION (x)", GREEN)
+    a = get_number("  First number : ")
+    b = get_number("  Second number: ")
+    result = multiply(a, b)
+
+    equation = f"{term(a)} x {term(b)} = {format_number(result)}"
+    draw_box([equation, "", f"Product: {format_number(result)}"],
+             "MULTIPLICATION RESULT", GREEN)
+    add_to_log(f"Multiplication: {equation}")
+    gain_xp()
+
+
 # ==============================================================
 #   SCREENS
 # ==============================================================
@@ -304,7 +323,7 @@ def main():
         elif choice == "2":
             subtraction_skill()
         elif choice == "3":
-            locked_skill("Multiplication")
+            multiplication_skill()
         elif choice == "4":
             locked_skill("Division")
         elif choice == "5":
