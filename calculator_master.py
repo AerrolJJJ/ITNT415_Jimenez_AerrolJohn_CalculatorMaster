@@ -259,6 +259,38 @@ def multiplication_skill():
     gain_xp()
 
 
+# [division_Jimenez] Division
+def divide(a, b):
+    return a / b
+
+
+def division_skill():
+    draw_box(["Divide the first number by the second."],
+             "[4] DIVISION (/)", GREEN)
+    a = get_number("  Dividend (first number) : ")
+    b = get_number("  Divisor (second number) : ")
+
+    # dividing by zero would crash the program, so catch it here
+    try:
+        result = divide(a, b)
+    except ZeroDivisionError:
+        draw_box([f"{term(a)} / 0 = ???",
+                  "",
+                  "ZeroDivisionError: you cannot divide by zero.",
+                  "The bug survived this time. Use a divisor "
+                  "other than 0."],
+                 "ERROR: DIVISION BY ZERO", RED)
+        return
+    if result_too_big(result):
+        return
+
+    equation = f"{term(a)} / {term(b)} = {format_number(result)}"
+    draw_box([equation, "", f"Quotient: {format_number(result)}"],
+             "DIVISION RESULT", GREEN)
+    add_to_log(f"Division: {equation}")
+    gain_xp()
+
+
 # ==============================================================
 #   SCREENS
 # ==============================================================
@@ -337,7 +369,7 @@ def main():
         elif choice == "3":
             multiplication_skill()
         elif choice == "4":
-            locked_skill("Division")
+            division_skill()
         elif choice == "5":
             show_battle_log()
         elif choice == "0":
