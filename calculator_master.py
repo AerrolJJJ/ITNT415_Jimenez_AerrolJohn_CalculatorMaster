@@ -158,6 +158,24 @@ def locked_skill(skill_name):
              "[LOCKED]", YELLOW)
 
 
+# [addition_Jimenez] Addition
+def add(a, b):
+    return a + b
+
+
+def addition_skill():
+    draw_box(["Add two numbers together."], "[1] ADDITION (+)", GREEN)
+    a = get_number("  First number : ")
+    b = get_number("  Second number: ")
+    result = add(a, b)
+
+    equation = f"{term(a)} + {term(b)} = {format_number(result)}"
+    draw_box([equation, "", f"Sum: {format_number(result)}"],
+             "ADDITION RESULT", GREEN)
+    add_to_log(f"Addition: {equation}")
+    gain_xp()
+
+
 # ==============================================================
 #   SCREENS
 # ==============================================================
@@ -230,7 +248,7 @@ def main():
         choice = input(f"{YELLOW}>> Choose your skill [0-5]: {RESET}").strip()
 
         if choice == "1":
-            locked_skill("Addition")
+            addition_skill()
         elif choice == "2":
             locked_skill("Subtraction")
         elif choice == "3":
